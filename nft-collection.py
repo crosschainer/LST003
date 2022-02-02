@@ -13,13 +13,13 @@ def seed(name: str):
 
 # function to mint a new NFT
 @export
-def mint_nft(name: str, description: str, ipfs_image_url: str, specials: dict, amount: int):
+def mint_nft(name: str, description: str, ipfs_image_url: str, metadata: dict, amount: int):
     assert name != "", "Name cannot be empty"
     assert collection_nfts[name] == 0, "Name already exists"
     assert amount > 0, "You cannot transfer negative amounts"
     assert collection_owner.get() == ctx.caller, "Only the collection owner can mint NFTs"
 
-    collection_nfts[name] = {"description": description, "ipfs_image_url": ipfs_image_url, "specials": specials, "amount": amount} # Adds NFT to collection with all details
+    collection_nfts[name] = {"description": description, "ipfs_image_url": ipfs_image_url, "metadata": metadata, "amount": amount} # Adds NFT to collection with all details
     collection_balances[ctx.caller, name] = amount # Mints the NFT
 
 # standard transfer function
